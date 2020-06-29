@@ -1,14 +1,15 @@
 import gym
-from comet_ml import Experiment
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from utils.log import Log
 from torch.distributions import Categorical
-from utils.utils import save_model
 import random
 import argparse
+import wandb
+import time
+import os
 
 
 parser = argparse.ArgumentParser()
@@ -92,10 +93,13 @@ class PPO(nn.Module):
             surr1 = ratio * advantage
             surr2 = torch.clamp(ratio, 1-args.eps_clip, 1+args.eps_clip) * advantage
             loss = -torch.min(surr1, surr2) + F.smooth_l1_loss(self.v(s) , td_target.detach())
+            loss_mean = loss.mean()
 
             self.optimizer.zero_grad()
-            loss.mean().backward()
+            loss_mean.backward()
             self.optimizer.step()
+
+            return loss_mean
 
 
 def main():
@@ -106,15 +110,14 @@ def main():
 
     log = Log(__file__[:-3])
 
-    experiment = Experiment(api_key="F8yfdGljIExZoi73No4gb1gF5",
-                            project_name="reinforcement-learning", workspace="zombasy")
+    wandb.init(project="dgdfhdfh")
+    wandb.watch(model)
 
-    experiment.set_model_graph(model)
-
-    for n_epi in range(2000):
+    for n_epi in range(600):
         s = env.reset()
         done = False
-        epsilon = max(0.01, args.epsilon - 0.01 * (n_epi / 300))
+        epsilon = max(0.01, args.epsilon - 0.01 * (n_epi / 200))
+        loss_temp = 0.0
         while not done:
             for t in range(args.T_horizon):
                 prob = model.pi(torch.from_numpy(s).float())
@@ -135,19 +138,21 @@ def main():
                 if done:
                     break
 
-            model.train_net()
+            loss_temp += model.train_net()
 
-        if n_epi%print_interval==0 and n_epi!=0:
+        if n_epi % print_interval == 0 and n_epi != 0:
             log.info("episode :{}, avg score : {:.1f}".format(n_epi, score/print_interval))
-            experiment.log_metric('score', score / print_interval)
-            experiment.log_metric('epsilon', epsilon)
+            wandb.log({'score': score/print_interval, 'epsilon': epsilon, 'loss': loss_temp/print_interval})
             score = 0.0
 
         if n_epi % 500 == 0 and n_epi != 0:
-            save_model(model, 'ppo', n_epi, experiment)
+            saved_model_name = 'ppo' + str(n_epi) + '.pt'
+            torch.save(model.state_dict(), os.path.join(wandb.run.dir, saved_model_name))
 
     env.close()
 
 
 if __name__ == '__main__':
+    temp_time = time.time()
     main()
+    print('**** Elapsed Time :' + str(time.time() - temp_time) + ' ****')

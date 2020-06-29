@@ -1,0 +1,4 @@
+[2020-04-10 13:50:23,528][INFO|ppo-wandb.py:143] >> episode :20, avg score : 22.4
+[2020-04-10 13:50:29,610][INFO|ppo-wandb.py:143] >> episode :40, avg score : 34.0
+[2020-04-10 13:50:36,500][INFO|ppo-wandb.py:143] >> episode :60, avg score : 45.0
+[2020-04-10 13:50:48,400][INFO|ppo-wandb.py:143] >> episode :80, avg score : 72.4

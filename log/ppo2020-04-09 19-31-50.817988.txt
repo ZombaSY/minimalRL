@@ -1,0 +1,12 @@
+[2020-04-09 19:32:04,321][INFO|ppo.py:156] >> episode :20, avg score : 27.6
+[2020-04-09 19:32:09,946][INFO|ppo.py:156] >> episode :40, avg score : 29.4
+[2020-04-09 19:32:18,296][INFO|ppo.py:156] >> episode :60, avg score : 46.2
+[2020-04-09 19:32:28,999][INFO|ppo.py:156] >> episode :80, avg score : 62.1
+[2020-04-09 19:32:42,175][INFO|ppo.py:156] >> episode :100, avg score : 81.1
+[2020-04-09 19:33:05,438][INFO|ppo.py:156] >> episode :120, avg score : 146.3
+[2020-04-09 19:33:34,374][INFO|ppo.py:156] >> episode :140, avg score : 190.5
+[2020-04-09 19:34:02,084][INFO|ppo.py:156] >> episode :160, avg score : 183.8
+[2020-04-09 19:34:24,882][INFO|ppo.py:156] >> episode :180, avg score : 141.2
+[2020-04-09 19:34:59,612][INFO|ppo.py:156] >> episode :200, avg score : 236.3
+[2020-04-09 19:35:36,757][INFO|ppo.py:156] >> episode :220, avg score : 246.1
+[2020-04-09 19:36:29,461][INFO|ppo.py:156] >> episode :240, avg score : 359.2

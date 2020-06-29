@@ -1,0 +1,27 @@
+method: bayes
+metric:
+  goal: maximize
+  name: score
+parameters:
+  K-epoch:
+    max: 10
+    min: 1
+  T-horizon:
+    max: 40
+    min: 5
+  eps-clip:
+    max: 0.3
+    min: 0.01
+  epsilon:
+    max: 0.2
+    min: 0.01
+  gamma:
+    max: 1
+    min: 0.8
+  learning-rate:
+    max: 0.001
+    min: 0.0001
+  lmbda:
+    max: 1
+    min: 0.8
+program: ppo-wandb.py

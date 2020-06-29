@@ -6,12 +6,14 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from utils.log import Log
 
-#Hyperparameters
+# Hyperparameters
 learning_rate = 0.0005
 gamma         = 0.98
 buffer_limit  = 50000
 batch_size    = 32
+
 
 class ReplayBuffer():
     def __init__(self):
@@ -39,6 +41,7 @@ class ReplayBuffer():
     def size(self):
         return len(self.buffer)
 
+
 class Qnet(nn.Module):
     def __init__(self):
         super(Qnet, self).__init__()
@@ -59,7 +62,8 @@ class Qnet(nn.Module):
             return random.randint(0,1)
         else : 
             return out.argmax().item()
-            
+
+
 def train(q, q_target, memory, optimizer):
     for i in range(10):
         s,a,r,s_prime,done_mask = memory.sample(batch_size)
@@ -74,12 +78,14 @@ def train(q, q_target, memory, optimizer):
         loss.backward()
         optimizer.step()
 
+
 def main():
     env = gym.make('CartPole-v1')
     q = Qnet()
     q_target = Qnet()
     q_target.load_state_dict(q.state_dict())
     memory = ReplayBuffer()
+    log = Log
 
     print_interval = 20
     score = 0.0  
@@ -109,7 +115,11 @@ def main():
             print("n_episode :{}, score : {:.1f}, n_buffer : {}, eps : {:.1f}%".format(
                                                             n_epi, score/print_interval, memory.size(), epsilon*100))
             score = 0.0
+
+    torch.save(q.state_dict(), 'dqn_model.pt')
+
     env.close()
+
 
 if __name__ == '__main__':
     main()

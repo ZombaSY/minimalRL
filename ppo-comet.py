@@ -114,7 +114,7 @@ def main():
     for n_epi in range(2000):
         s = env.reset()
         done = False
-        epsilon = max(0.01, args.epsilon - 0.01 * (n_epi / 300))
+        epsilon = max(0.01, args.epsilon - 0.01 * (n_epi / 200))
         while not done:
             for t in range(args.T_horizon):
                 prob = model.pi(torch.from_numpy(s).float())

@@ -1,0 +1,4 @@
+[2020-04-09 19:29:20,985][INFO|ppo.py:156] >> episode :20, avg score : 30.6
+[2020-04-09 19:29:28,849][INFO|ppo.py:156] >> episode :40, avg score : 47.0
+[2020-04-09 19:29:40,290][INFO|ppo.py:156] >> episode :60, avg score : 68.0
+[2020-04-09 19:29:59,279][INFO|ppo.py:156] >> episode :80, avg score : 120.5

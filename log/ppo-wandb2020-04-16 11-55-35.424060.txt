@@ -1,0 +1,8 @@
+[2020-04-16 11:55:38,585][INFO|ppo-wandb.py:144] >> episode :20, avg score : 19.1
+[2020-04-16 11:55:38,847][INFO|ppo-wandb.py:144] >> episode :40, avg score : 21.2
+[2020-04-16 11:55:39,180][INFO|ppo-wandb.py:144] >> episode :60, avg score : 29.8
+[2020-04-16 11:55:39,475][INFO|ppo-wandb.py:144] >> episode :80, avg score : 23.2
+[2020-04-16 11:55:39,827][INFO|ppo-wandb.py:144] >> episode :100, avg score : 31.9
+[2020-04-16 11:55:40,219][INFO|ppo-wandb.py:144] >> episode :120, avg score : 36.2
+[2020-04-16 11:55:40,546][INFO|ppo-wandb.py:144] >> episode :140, avg score : 34.4
+[2020-04-16 11:55:40,952][INFO|ppo-wandb.py:144] >> episode :160, avg score : 44.1
